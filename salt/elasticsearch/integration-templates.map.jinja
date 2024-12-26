@@ -1,0 +1,110 @@
+{# Copyright Security Onion Solutions LLC and/or licensed to Security Onion Solutions LLC under one
+   or more contributor license agreements. Licensed under the Elastic License 2.0 as shown at
+   https://securityonion.net/license; you may not use this file except in compliance with the
+   Elastic License 2.0. #}
+
+{% import_yaml 'elasticfleet/defaults.yaml' as ELASTICFLEETDEFAULTS %}
+{% set packages = ELASTICFLEETDEFAULTS.get('elasticfleet', {}).get('packages', {}) %}
+{% set INTEGRATION_INDEX_SETTINGS = {} %}
+
+
+{% set default_settings = {
+    'index_sorting': false,
+    'index_template': {
+        'data_stream': {
+          'allow_custom_routing': false,
+          'hidden': false
+        },
+        'priority': 501,
+        'template': {
+            'settings': {
+                'index': {
+                    'number_of_replicas': 0
+                }
+            }
+        }
+    },
+    'policy': {
+        'phases': {
+          'cold': {
+            'actions': {
+              'set_priority': {
+                'priority': 0
+              }
+            },
+            'min_age': '60d'
+          },
+          'delete': {
+            'actions': {
+              'delete': {}
+            },
+            'min_age': '365d'
+          },
+          'hot': {
+            'actions': {
+              'rollover':{
+                'max_age': '30d',
+                'max_primary_shard_size': '50gb'
+              },
+              'set_priority': {
+                'priority': 100
+              }
+            },
+            'min_age': '0ms'
+          },
+          'warm': {
+            'actions': {
+              'set_priority': {
+                'priority': 50
+              }
+            },
+            'min_age': '30d'
+          }
+        }
+    }
+} %}
+
+{# Create template for each package component from elasticfleet/defaults.yaml #}
+{% for package in packages %}
+    {% for pkg_name, components in package.items() %}
+        {% if components is not none %}
+            {% for component in components %}
+                {% set component_dot = component.replace('_x_', '.') %}
+                {% set template_name = 'so-logs-' ~ component %}
+
+                {% set template = {
+                    'index_sorting': default_settings.index_sorting,
+                    'index_template': {
+                        'composed_of': [
+                            'logs-' ~ component_dot ~ '@package',
+                            'logs-' ~ component_dot ~ '@custom',
+                            'so-fleet-_globals-1',
+                            'so-fleet_agent_id_verification-1'
+                        ],
+                        'data_stream': default_settings.index_template.data_stream,
+                        'ignore_missing_component_templates': [
+                            'logs-' ~ component_dot ~  '@custom'
+                        ],
+                        'index_patterns': [
+                            'logs-' ~ component_dot ~ '-*'
+                        ],
+                        'priority': default_settings.index_template.priority,
+                        'template': {
+                            'settings': {
+                                'index': {
+                                    'lifecycle': {
+                                        'name': 'so-logs-' ~ component_dot ~ '-logs'
+                                    },
+                                    'number_of_replicas': default_settings.index_template.template.settings.index.number_of_replicas
+                                }
+                            }
+                        }
+                    },
+                    'policy': default_settings.policy
+                } %}
+
+                {% do INTEGRATION_INDEX_SETTINGS.update({template_name: template}) %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}

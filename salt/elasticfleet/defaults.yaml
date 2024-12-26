@@ -10,6 +10,7 @@ elasticfleet:
       grid_enrollment: ''
     defend_filters:
       enable_auto_configuration: False
+    subscription_integrations: False
   logging:
     zeek:
       excluded:
