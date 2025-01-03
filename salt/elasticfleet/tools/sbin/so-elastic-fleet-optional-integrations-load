@@ -78,7 +78,7 @@ if [[ -f $STATE_FILE_SUCCESS  ]]; then
 
         if [ $PENDING_UPDATE ]; then
             # Run bulk install of packages
-            # elastic_fleet_bulk_package_install $BULK_INSTALL_PACKAGE_LIST
+            elastic_fleet_bulk_package_install $BULK_INSTALL_PACKAGE_LIST
 
             # Write out file for generating index/component/ilm templates
             latest_installed_package_list=$(elastic_fleet_installed_packages)
