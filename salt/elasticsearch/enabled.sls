@@ -172,13 +172,6 @@ so-elasticsearch-ilm-policy-load:
     - onchanges:
       - file: so-elasticsearch-ilm-policy-load-script
 
-configure-addon-fleet-integrations:
-  cmd.run:
-    - name: /usr/sbin/so-elastic-fleet-optional-integrations-load
-    - cwd: /opt/so
-    - require:
-      - docker_container: so-elasticsearch
-
 so-elasticsearch-templates-reload:
   file.absent:
     - name: /opt/so/state/estemplates.txt
