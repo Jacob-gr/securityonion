@@ -73,7 +73,7 @@
 {%           set integration_defaults = {
               "index_sorting": false,
               "index_template": {
-                  "composed_of": [integration_type ~ component_name ~ "@package", integration_type ~ component_name ~ "@custom", "so-fleet_globals-1", "so-fleet_agent_id_verification-1"],
+                  "composed_of": [integration_type ~ component_name ~ "@package", integration_type ~ component_name ~ "@custom", "so-fleet_integrations.ip_mappings", "so-fleet_globals-1", "so-fleet_agent_id_verification-1"],
                   "data_stream": {
                       "allow_custom_routing": false,
                       "hidden": false
