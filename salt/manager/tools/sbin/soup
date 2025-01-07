@@ -527,6 +527,10 @@ post_to_2.4.111() {
 
 post_to_2.4.120() {
   update_elasticsearch_index_settings
+
+  # Sync the newly generated index templates for elasticfleet integrations
+  salt-call state.apply elasticsearch queue=True
+
   POSTVERSION=2.4.120
 }
 
@@ -735,6 +739,8 @@ up_to_2.4.120() {
 
   # New Grid Integration added this release
   rm -f /opt/so/state/eaintegrations.txt
+
+
 
   INSTALLEDVERSION=2.4.120
 }
