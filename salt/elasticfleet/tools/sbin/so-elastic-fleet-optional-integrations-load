@@ -13,10 +13,15 @@ STATE_FILE_SUCCESS=/opt/so/state/estemplates.txt
 INSTALLED_PACKAGE_LIST=/tmp/esfleet_installed_packages.json
 BULK_INSTALL_PACKAGE_LIST=/tmp/esfleet_bulk_install.json
 BULK_INSTALL_PACKAGE_TMP=/tmp/esfleet_bulk_install_tmp.json
+BULK_INSTALL_OUTPUT=/opt/so/state/esfleet_bulk_install_results.json
 PACKAGE_COMPONENTS=/opt/so/state/esfleet_package_components.json
 
 SKIP_SUBSCRIPTION=true
 PENDING_UPDATE=false
+
+# Integrations which are included in the package registry, but excluded from automatic installation via this script.
+#   Requiring some level of manual Elastic Stack configuration before installation
+EXCLUDED_INTEGRATIONS=('apm')
 
 version_conversion(){
     version=$1
@@ -43,13 +48,13 @@ compare_versions() {
 
 if [[ -f $STATE_FILE_SUCCESS  ]]; then
     if retry 3 1 "curl -s -K /opt/so/conf/elasticsearch/curl.config --output /dev/null --silent --head --fail localhost:5601/api/fleet/epm/packages"; then
-        # Package_list contains all NON-beta integrations.
+        # Package_list contains all integrations beta / non-beta.
         latest_package_list=$(/usr/sbin/so-elastic-fleet-package-list)
         echo '{ "packages" : []}' > $BULK_INSTALL_PACKAGE_LIST
         rm -f $INSTALLED_PACKAGE_LIST
         echo $latest_package_list | jq '{packages: [.items[] | {name: .name, latest_version: .version, installed_version: .savedObject.attributes.install_version, subscription: .conditions.elastic.subscription }]}' >> $INSTALLED_PACKAGE_LIST
 
-        cat "$INSTALLED_PACKAGE_LIST" | jq -c '.packages[]' | while read -r package; do
+        while read -r package; do
             # get package details
             package_name=$(echo "$package" | jq -r '.name')
             latest_version=$(echo "$package" | jq -r '.latest_version')
@@ -57,28 +62,35 @@ if [[ -f $STATE_FILE_SUCCESS  ]]; then
             subscription=$(echo "$package" | jq -r '.subscription')
             bulk_package=$(echo "$package" | jq '{name: .name, version: .latest_version}' )
 
-            if [ $SKIP_SUBSCRIPTION ] && [[ "$subscription" != "basic" && "$subscription" != "null" && -n "$subscription" ]]; then
-                # pass over integrations that require non-basic elastic license
-                continue
-            else
-                if [ -n "$installed_version" ]; then
-                    results=$(compare_versions "$latest_version" "$installed_version")
-                    if [ $results == "greater" ]; then
-                        echo "$package_name is not up to date... Adding to next update."
-                        jq --argjson package "$bulk_package" '.packages += [$package]' $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_PACKAGE_TMP && mv $BULK_INSTALL_PACKAGE_TMP $BULK_INSTALL_PACKAGE_LIST
-                        PENDING_UPDATE=true
-                    fi
+            if [[ ! "${EXCLUDED_INTEGRATIONS[@]}" =~ "$package_name" ]]; then
+                if $SKIP_SUBSCRIPTION && [[ "$subscription" != "basic" && "$subscription" != "null" && -n "$subscription" ]]; then
+                    # pass over integrations that require non-basic elastic license
+                    echo "$package_name integration requires an Elastic license of $subscription or greater... skipping"
+                    continue
                 else
-                    echo "$package_name is not installed... Adding to next update."
-                    jq --argjson package "$bulk_package" '.packages += [$package]' $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_PACKAGE_TMP && mv $BULK_INSTALL_PACKAGE_TMP $BULK_INSTALL_PACKAGE_LIST
-                    PENDING_UPDATE=true
-                fi
-            fi
-        done
+                    if [[ "$installed_version" == "null" || -z "$installed_version" ]]; then
+                        echo "$package_name is not installed... Adding to next update."
+                        jq --argjson package "$bulk_package" '.packages += [$package]' $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_PACKAGE_TMP && mv $BULK_INSTALL_PACKAGE_TMP $BULK_INSTALL_PACKAGE_LIST
 
-        if [ $PENDING_UPDATE ]; then
+                        PENDING_UPDATE=true
+                    else
+                        results=$(compare_versions "$latest_version" "$installed_version")
+                        if [ $results == "greater" ]; then
+                            echo "$package_name is at version $installed_version latest version is $latest_version... Adding to next update."
+                            jq --argjson package "$bulk_package" '.packages += [$package]' $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_PACKAGE_TMP && mv $BULK_INSTALL_PACKAGE_TMP $BULK_INSTALL_PACKAGE_LIST
+
+                            PENDING_UPDATE=true
+                        fi
+                    fi
+                fi
+            else
+                echo "Skipping $package_name..."
+            fi
+        done <<< "$(jq -c '.packages[]' "$INSTALLED_PACKAGE_LIST")"
+
+        if [ "$PENDING_UPDATE" = true ]; then
             # Run bulk install of packages
-            elastic_fleet_bulk_package_install $BULK_INSTALL_PACKAGE_LIST
+            elastic_fleet_bulk_package_install $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_OUTPUT
 
             # Write out file for generating index/component/ilm templates
             latest_installed_package_list=$(elastic_fleet_installed_packages)
