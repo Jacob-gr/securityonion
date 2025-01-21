@@ -1119,6 +1119,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent@package
         - logs-elastic_agent@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1182,6 +1183,7 @@ elasticsearch:
         composed_of:
         - logs-elastic_agent.apm_server@package
         - logs-elastic_agent.apm_server@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1245,6 +1247,7 @@ elasticsearch:
         composed_of:
         - logs-elastic_agent.auditbeat@package
         - logs-elastic_agent.auditbeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1308,6 +1311,7 @@ elasticsearch:
         composed_of:
         - logs-elastic_agent.cloudbeat@package
         - logs-elastic_agent.cloudbeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         ignore_missing_component_templates:
@@ -1369,6 +1373,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent.endpoint_security@package
         - logs-elastic_agent.endpoint_security@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1427,6 +1432,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent.filebeat@package
         - logs-elastic_agent.filebeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1485,6 +1491,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent.fleet_server@package
         - logs-elastic_agent.fleet_server@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1539,6 +1546,7 @@ elasticsearch:
         composed_of:
         - logs-elastic_agent.heartbeat@package
         - logs-elastic_agent.heartbeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         ignore_missing_component_templates:
@@ -1600,6 +1608,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent.metricbeat@package
         - logs-elastic_agent.metricbeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1658,6 +1667,7 @@ elasticsearch:
         - event-mappings
         - logs-elastic_agent.osquerybeat@package
         - logs-elastic_agent.osquerybeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1715,6 +1725,7 @@ elasticsearch:
         composed_of:
         - logs-elastic_agent.packetbeat@package
         - logs-elastic_agent.packetbeat@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1779,6 +1790,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.alerts@custom
         - logs-endpoint.alerts@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1837,6 +1849,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.diagnostic.collection@custom
         - logs-endpoint.diagnostic.collection@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1895,6 +1908,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.api@custom
         - logs-endpoint.events.api@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -1953,6 +1967,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.file@custom
         - logs-endpoint.events.file@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2011,6 +2026,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.library@custom
         - logs-endpoint.events.library@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2069,6 +2085,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.network@custom
         - logs-endpoint.events.network@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2127,6 +2144,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.process@custom
         - logs-endpoint.events.process@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2185,6 +2203,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.registry@custom
         - logs-endpoint.events.registry@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2243,6 +2262,7 @@ elasticsearch:
         - event-mappings
         - logs-endpoint.events.security@custom
         - logs-endpoint.events.security@package
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2300,13 +2320,13 @@ elasticsearch:
         composed_of:
         - logs-http_endpoint.generic@package
         - logs-http_endpoint.generic@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
           allow_custom_routing: false
           hidden: false
         ignore_missing_component_templates:
-        - logs-http_endpoint.generic@package 
         - logs-http_endpoint.generic@custom
         index_patterns:
         - logs-http_endpoint.generic-*
@@ -2347,6 +2367,7 @@ elasticsearch:
         composed_of:
         - logs-httpjson.generic@package
         - logs-httpjson.generic@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2538,6 +2559,7 @@ elasticsearch:
         - event-mappings
         - logs-system.application@package
         - logs-system.application@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         - so-system-mappings
@@ -2586,6 +2608,7 @@ elasticsearch:
         - event-mappings
         - logs-system.auth@package
         - logs-system.auth@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         - so-system-mappings
@@ -2634,6 +2657,7 @@ elasticsearch:
         - event-mappings
         - logs-system.security@package
         - logs-system.security@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         - so-system-mappings
@@ -2730,6 +2754,7 @@ elasticsearch:
         - event-mappings
         - logs-system.system@package
         - logs-system.system@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         - so-system-mappings
@@ -2777,6 +2802,7 @@ elasticsearch:
         composed_of:
         - logs-windows.forwarded@package
         - logs-windows.forwarded@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2823,6 +2849,7 @@ elasticsearch:
         composed_of:
         - logs-windows.powershell@package
         - logs-windows.powershell@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2869,6 +2896,7 @@ elasticsearch:
         composed_of:
         - logs-windows.powershell_operational@package
         - logs-windows.powershell_operational@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2915,6 +2943,7 @@ elasticsearch:
         composed_of:
         - logs-windows.sysmon_operational@package
         - logs-windows.sysmon_operational@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
@@ -2961,13 +2990,13 @@ elasticsearch:
         composed_of:
         - logs-winlog.winlog@package
         - logs-winlog.winlog@custom
+        - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
         data_stream:
           allow_custom_routing: false
           hidden: false
         ignore_missing_component_templates:
-        - logs-winlog.winlog@package
         - logs-winlog.winlog@custom
         index_patterns:
         - logs-winlog.winlog-*
