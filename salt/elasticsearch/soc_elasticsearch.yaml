@@ -166,7 +166,7 @@ elasticsearch:
       index_template:
         index_patterns:
           description: Patterns for matching multiple indices or tables.
-          forceType: "[]string"
+          forcedType: "[]string"
           multiline: True
           global: True
           advanced: True
