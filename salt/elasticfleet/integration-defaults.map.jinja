@@ -67,7 +67,10 @@
 {%           if component_name in WEIRD_INTEGRATIONS %}
 {%             set component_name = WEIRD_INTEGRATIONS[component_name] %}
 {%           endif %}
-{%           set integration_key = "so-" ~ integration_type ~ component_name %}
+{#           component_name_x maintains the functionality of merging local pillar changes with generated 'defaults' via SOC UI #}
+{%           set component_name_x = component_name.replace(".","_x_") %}
+{#           pillar overrides/merge expects the key names to follow the naming in elasticsearch/defaults.yaml eg. so-logs-1password_x_item_usages . The _x_ is replaced later on in elasticsearch/template.map.jinja #}
+{%           set integration_key = "so-" ~ integration_type ~ component_name_x %}
 
 {#           Default integration settings #}
 {%           set integration_defaults = {
