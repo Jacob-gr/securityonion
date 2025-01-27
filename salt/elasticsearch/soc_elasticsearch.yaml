@@ -77,6 +77,12 @@ elasticsearch:
     custom008: *pipelines
     custom009: *pipelines
     custom010: *pipelines
+  managed_integrations:
+    description: List of integrations to add into SOC config UI. Enter the full or partial integration name. Eg. 1password, 1pass
+    forcedType: "[]string"
+    global: True
+    advanced: True
+    helpLink: elasticsearch.html
   index_settings:
     global_overrides:
       index_template:
@@ -166,7 +172,7 @@ elasticsearch:
       index_template:
         index_patterns:
           description: Patterns for matching multiple indices or tables.
-          forceType: "[]string"
+          forcedType: "[]string"
           multiline: True
           global: True
           advanced: True
