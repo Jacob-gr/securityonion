@@ -5,7 +5,6 @@
 
 {% import_json '/opt/so/state/esfleet_package_components.json' as ADDON_PACKAGE_COMPONENTS %}
 {% import_yaml 'elasticfleet/defaults.yaml' as ELASTICFLEETDEFAULTS %}
-{% import_yaml 'elasticfleet/integration-defaults.yaml' as INTEGRATIONDEFAULTS %}
 
 {% set CORE_ESFLEET_PACKAGES = ELASTICFLEETDEFAULTS.get('elasticfleet', {}).get('packages', {}) %}
 {% set ADDON_INTEGRATION_DEFAULTS = {} %}
