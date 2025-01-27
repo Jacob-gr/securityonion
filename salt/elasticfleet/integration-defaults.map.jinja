@@ -12,6 +12,7 @@
 {# Some fleet integrations don't follow the standard naming convention #}
 {% set WEIRD_INTEGRATIONS = {
     'awsfirehose.logs': 'awsfirehose',
+    'awsfirehose.metrics': 'aws.cloudwatch',
     'cribl.logs': 'cribl',
     'sentinel_one_cloud_funnel.logins': 'sentinel_one_cloud_funnel.login',
     'azure_application_insights.app_insights': 'azure.app_insights',
