@@ -1,5 +1,12 @@
 {
   "description": "Pipeline for PFsense",
+  "_meta": {
+    "package": {
+      "name": "pfsense"
+    },
+    "managed_by": "fleet",
+    "managed": true
+  },
   "processors": [
     {
       "set": {
@@ -153,7 +160,7 @@
       }
     },
     {
-     "pipeline": {
+      "pipeline": {
         "name": "logs-pfsense.log-1.20.2-suricata",
         "if": "ctx.event.provider == 'suricata'"
       }
