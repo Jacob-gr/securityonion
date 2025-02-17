@@ -91,15 +91,12 @@ if [[ -f $STATE_FILE_SUCCESS  ]]; then
         if [ "$PENDING_UPDATE" = true ]; then
             # Run bulk install of packages
             elastic_fleet_bulk_package_install $BULK_INSTALL_PACKAGE_LIST > $BULK_INSTALL_OUTPUT
-
-            # Write out file for generating index/component/ilm templates
-            latest_installed_package_list=$(elastic_fleet_installed_packages)
-            echo $latest_installed_package_list | jq '[.items[] | {name: .name, es_index_patterns: .dataStreams}]' > $PACKAGE_COMPONENTS
-
         else
             echo "Elastic integrations don't appear to need installation/updating..."
-            exit 0
         fi
+        # Write out file for generating index/component/ilm templates
+        latest_installed_package_list=$(elastic_fleet_installed_packages)
+        echo $latest_installed_package_list | jq '[.items[] | {name: .name, es_index_patterns: .dataStreams}]' > $PACKAGE_COMPONENTS
 
     else
         # This is the installation of add-on integrations and upgrade of existing integrations. Exiting without error, next highstate will attempt to re-run.
