@@ -544,6 +544,11 @@ post_to_2.4.130() {
   # Sync the newly generated index templates for elasticfleet integrations
   salt-call state.apply elasticsearch queue=True
 
+  # Update kibana default space
+  salt-call state.apply kibana.config queue=True
+  echo "Updating Kibana default space"
+  /usr/sbin/so-kibana-space-defaults
+
   POSTVERSION=2.4.130
 }
 
