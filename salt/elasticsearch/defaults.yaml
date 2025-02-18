@@ -1783,13 +1783,131 @@ elasticsearch:
               set_priority:
                 priority: 50
             min_age: 30d
+    so-logs-endpoint_x_actions:
+      index_sorting: false
+      index_template:
+        composed_of:
+        - .logs-endpoint.actions@package
+        - .logs-endpoint.actions@custom
+        - event-mappings
+        - so-fleet_integrations.ip_mappings-1
+        - so-fleet_globals-1
+        - so-fleet_agent_id_verification-1
+        data_stream:
+          allow_custom_routing: false
+          hidden: false
+        ignore_missing_component_templates:
+        - .logs-endpoint.actions@custom
+        index_patterns:
+        - logs-endpoint.actions-*
+        priority: 501
+        template:
+          settings:
+            index:
+              lifecycle:
+                name: so-logs-endpoint.actions-logs
+              mapping:
+                total_fields:
+                  limit: 5000
+              number_of_replicas: 0
+              sort:
+                field: '@timestamp'
+                order: desc
+      policy:
+        _meta:
+          managed: true
+          managed_by: security_onion
+          package:
+            name: elastic_agent
+        phases:
+          cold:
+            actions:
+              set_priority:
+                priority: 0
+            min_age: 60d
+          delete:
+            actions:
+              delete: {}
+            min_age: 365d
+          hot:
+            actions:
+              rollover:
+                max_age: 30d
+                max_primary_shard_size: 50gb
+              set_priority:
+                priority: 100
+            min_age: 0ms
+          warm:
+            actions:
+              set_priority:
+                priority: 50
+            min_age: 30d
+    so-logs-endpoint_x_action_x_responses:
+      index_sorting: false
+      index_template:
+        composed_of:
+        - .logs-endpoint.action.responses@package
+        - .logs-endpoint.action.responses@custom
+        - event-mappings
+        - so-fleet_integrations.ip_mappings-1
+        - so-fleet_globals-1
+        - so-fleet_agent_id_verification-1
+        data_stream:
+          allow_custom_routing: false
+          hidden: false
+        ignore_missing_component_templates:
+        - .logs-endpoint.action.responses@custom
+        index_patterns:
+        - logs-endpoint.action.responses-*
+        priority: 501
+        template:
+          settings:
+            index:
+              lifecycle:
+                name: so-logs-endpoint.actions-logs
+              mapping:
+                total_fields:
+                  limit: 5000
+              number_of_replicas: 0
+              sort:
+                field: '@timestamp'
+                order: desc
+      policy:
+        _meta:
+          managed: true
+          managed_by: security_onion
+          package:
+            name: elastic_agent
+        phases:
+          cold:
+            actions:
+              set_priority:
+                priority: 0
+            min_age: 60d
+          delete:
+            actions:
+              delete: {}
+            min_age: 365d
+          hot:
+            actions:
+              rollover:
+                max_age: 30d
+                max_primary_shard_size: 50gb
+              set_priority:
+                priority: 100
+            min_age: 0ms
+          warm:
+            actions:
+              set_priority:
+                priority: 50
+            min_age: 30d
     so-logs-endpoint_x_alerts:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.alerts@custom
         - logs-endpoint.alerts@package
+        - logs-endpoint.alerts@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -1846,9 +1964,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
+        - .logs-endpoint.diagnostic.collection@package
+        - .logs-endpoint.diagnostic.collection@custom
         - event-mappings
-        - logs-endpoint.diagnostic.collection@custom
-        - logs-endpoint.diagnostic.collection@package
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -1856,7 +1974,7 @@ elasticsearch:
           allow_custom_routing: false
           hidden: false
         ignore_missing_component_templates:
-        - logs-endpoint.diagnostic.collection@custom
+        - .logs-endpoint.diagnostic.collection@custom
         index_patterns:
         - .logs-endpoint.diagnostic.collection-*
         priority: 501
@@ -1905,9 +2023,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.api@custom
         - logs-endpoint.events.api@package
+        - logs-endpoint.events.api@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -1964,9 +2082,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.file@custom
         - logs-endpoint.events.file@package
+        - logs-endpoint.events.file@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2023,9 +2141,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.library@custom
         - logs-endpoint.events.library@package
+        - logs-endpoint.events.library@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2082,9 +2200,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.network@custom
         - logs-endpoint.events.network@package
+        - logs-endpoint.events.network@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2141,9 +2259,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.process@custom
         - logs-endpoint.events.process@package
+        - logs-endpoint.events.process@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2200,9 +2318,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.registry@custom
         - logs-endpoint.events.registry@package
+        - logs-endpoint.events.registry@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2259,9 +2377,9 @@ elasticsearch:
       index_sorting: false
       index_template:
         composed_of:
-        - event-mappings
-        - logs-endpoint.events.security@custom
         - logs-endpoint.events.security@package
+        - logs-endpoint.events.security@custom
+        - event-mappings
         - so-fleet_integrations.ip_mappings-1
         - so-fleet_globals-1
         - so-fleet_agent_id_verification-1
@@ -2278,6 +2396,65 @@ elasticsearch:
             index:
               lifecycle:
                 name: so-logs-endpoint.events.security-logs
+              mapping:
+                total_fields:
+                  limit: 5000
+              number_of_replicas: 0
+              sort:
+                field: '@timestamp'
+                order: desc
+      policy:
+        _meta:
+          managed: true
+          managed_by: security_onion
+          package:
+            name: elastic_agent
+        phases:
+          cold:
+            actions:
+              set_priority:
+                priority: 0
+            min_age: 60d
+          delete:
+            actions:
+              delete: {}
+            min_age: 365d
+          hot:
+            actions:
+              rollover:
+                max_age: 30d
+                max_primary_shard_size: 50gb
+              set_priority:
+                priority: 100
+            min_age: 0ms
+          warm:
+            actions:
+              set_priority:
+                priority: 50
+            min_age: 30d
+    so-logs-endpoint_x_heartbeat:
+      index_sorting: false
+      index_template:
+        composed_of:
+        - .logs-endpoint.heartbeat@package
+        - .logs-endpoint.heartbeat@custom
+        - event-mappings
+        - so-fleet_integrations.ip_mappings-1
+        - so-fleet_globals-1
+        - so-fleet_agent_id_verification-1
+        data_stream:
+          allow_custom_routing: false
+          hidden: false
+        ignore_missing_component_templates:
+        - .logs-endpoint.heartbeat@custom
+        index_patterns:
+        - .logs-endpoint.heartbeat-*
+        priority: 501
+        template:
+          settings:
+            index:
+              lifecycle:
+                name: so-logs-endpoint.heartbeat-logs
               mapping:
                 total_fields:
                   limit: 5000
