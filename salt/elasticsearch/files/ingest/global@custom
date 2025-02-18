@@ -10,7 +10,7 @@
     { "split":      { "if": "ctx.event?.dataset != null && ctx.event.dataset.contains('.')", "field": "event.dataset", "separator": "\\.", "target_field": "module_temp"  } },
     { "split":      { "if": "ctx.data_stream?.dataset.contains('.')", "field":"data_stream.dataset", "separator":"\\.", "target_field":"datastream_dataset_temp", "ignore_missing":true } },
     { "set":        { "if": "ctx.module_temp != null", "override": true, "field": "event.module", "value": "{{module_temp.0}}" } },
-    { "set":        { "if": "ctx.datastream_dataset_temp[0] == 'network_traffic'", "field":"event.module", "value":"{{ datastream_dataset_temp.0 }}", "ignore_failure":true, "ignore_empty_value":true, "description":"Fix EA network packet capture" } },
+    { "set":        { "if": "ctx.datastream_dataset_temp != null && ctx.datastream_dataset_temp[0] == 'network_traffic'", "field":"event.module", "value":"{{ datastream_dataset_temp.0 }}", "ignore_failure":true, "ignore_empty_value":true, "description":"Fix EA network packet capture" } },
     { "gsub":       { "if": "ctx.event?.dataset != null && ctx.event.dataset.contains('.')", "field": "event.dataset", "pattern": "^[^.]*.", "replacement": "", "target_field": "dataset_tag_temp" } },
     { "append":     { "if": "ctx.dataset_tag_temp != null", "field": "tags", "value": "{{dataset_tag_temp}}", "allow_duplicates": false  } },
     { "set":        { "if": "ctx.network?.direction == 'egress'", "override": true, "field": "network.initiated", "value": "true" } },
