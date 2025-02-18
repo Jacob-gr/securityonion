@@ -406,6 +406,7 @@ preupgrade_changes() {
     [[ "$INSTALLEDVERSION" == 2.4.100 ]] && up_to_2.4.110
     [[ "$INSTALLEDVERSION" == 2.4.110 ]] && up_to_2.4.111
     [[ "$INSTALLEDVERSION" == 2.4.111 ]] && up_to_2.4.120
+    [[ "$INSTALLEDVERSION" == 2.4.120 ]] && up_to_2.4.130
     true
 }
 
@@ -429,6 +430,7 @@ postupgrade_changes() {
     [[ "$POSTVERSION"  == 2.4.100 ]] && post_to_2.4.110
     [[ "$POSTVERSION" == 2.4.110 ]] && post_to_2.4.111
     [[ "$POSTVERSION"  == 2.4.111 ]] && post_to_2.4.120
+    [[ "$POSTVERSION"  == 2.4.120 ]] && post_to_2.4.130
     true
 }
 
@@ -535,6 +537,21 @@ post_to_2.4.120() {
   /sbin/so-elastic-agent-gen-installers
 
   POSTVERSION=2.4.120
+}
+
+post_to_2.4.130() {
+  # Integrations policies need to be updated, along with ingest pipelines & index templates.
+  rm -f /opt/so/state/eaintegrations.txt /opt/so/state/espipelines.txt /opt/so/state/estemplates.txt
+
+  # Sync the newly generated index templates for elasticfleet integrations
+  salt-call state.apply elasticsearch queue=True
+
+  # Update kibana default space
+  salt-call state.apply kibana.config queue=True
+  echo "Updating Kibana default space"
+  /usr/sbin/so-kibana-space-defaults
+
+  POSTVERSION=2.4.130
 }
 
 repo_sync() {
@@ -716,8 +733,8 @@ up_to_2.4.90() {
 }
 
 up_to_2.4.100() {
-  # Elastic Update for this release, so download Elastic Agent files
-  determine_elastic_agent_upgrade
+  echo "Nothing to do for 2.4.100"
+
   INSTALLEDVERSION=2.4.100
 }
 
@@ -743,7 +760,16 @@ up_to_2.4.120() {
   # New Grid Integration added this release
   rm -f /opt/so/state/eaintegrations.txt
 
+
+
   INSTALLEDVERSION=2.4.120
+}
+
+up_to_2.4.130() {
+  # Elastic Update for this release, so download Elastic Agent files
+  determine_elastic_agent_upgrade
+
+  INSTALLEDVERSION=2.4.130
 }
 
 add_hydra_pillars() {
