@@ -46,10 +46,11 @@ function usage() {
             Optional parameters: 
               --skip-sync               (defers the Elastic sync until the next scheduled time)
   
-  password: Updates a user's password and disables MFA
+  password: Updates a user's password and disables MFA, SSO, etc
             Required parameters: 
               --email <email>
             Optional parameters: 
+              --password-only           (only updates the password, does not disable MFA or SSO)
               --skip-sync               (defers the Elastic sync until the next scheduled time)
   
    profile: Updates a user's profile information
@@ -119,6 +120,8 @@ while [[ $# -gt 0 ]]; do
       note=$(echo $1 | sed 's/"/\\"/g')
       shift
       ;;
+    --password-only) 
+      passwordOnly=1
     --skip-sync) 
       SKIP_SYNC=1
       ;;
@@ -236,6 +239,11 @@ function updatePassword() {
     # Update DB with new hash
     echo "update identity_credentials set config=CAST('{\"hashed_password\":\"$passwordHash\"}' as BLOB), created_at=datetime('now'), updated_at=datetime('now') where identity_id='${identityId}' and identity_credential_type_id=(select id from identity_credential_types where name='password');" | sqlite3 -cmd ".timeout ${databaseTimeout}" "$databasePath"
     [[ $? != 0 ]] && fail "Unable to update password"
+
+    if [[ $passwordOnly -eq 1 ]]; then
+      return
+    fi
+
     # Deactivate MFA
     echo "delete from identity_credential_identifiers where identity_credential_id in (select id from identity_credentials where identity_id='${identityId}' and identity_credential_type_id in (select id from identity_credential_types where name in ('totp', 'webauthn', 'oidc')));" | sqlite3 -cmd ".timeout ${databaseTimeout}" "$databasePath"
     [[ $? != 0 ]] && fail "Unable to clear aal2 identity IDs"
