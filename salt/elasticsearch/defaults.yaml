@@ -1146,15 +1146,65 @@ elasticsearch:
                 name: elastic_agent
           settings:
             index:
+              codec: best_compression
               lifecycle:
                 name: so-logs-elastic_agent-logs
               mapping:
                 total_fields:
                   limit: 5000
+                ignore_malformed: true
               number_of_replicas: 0
               sort:
                 field: '@timestamp'
                 order: desc
+              query:
+                default_field:
+                  - cloud.account.id
+                  - cloud.availability_zone
+                  - cloud.instance.id
+                  - cloud.instance.name
+                  - cloud.machine.type
+                  - cloud.provider
+                  - cloud.region
+                  - cloud.project.id
+                  - cloud.image.id
+                  - container.id
+                  - container.image.name
+                  - container.name
+                  - host.architecture
+                  - host.hostname
+                  - host.id
+                  - host.mac
+                  - host.name
+                  - host.os.family
+                  - host.os.kernel
+                  - host.os.name
+                  - host.os.platform
+                  - host.os.version
+                  - host.os.build
+                  - host.os.codename
+                  - host.type
+                  - ecs.version
+                  - agent.build.original
+                  - agent.ephemeral_id
+                  - agent.id
+                  - agent.name
+                  - agent.type
+                  - agent.version
+                  - log.level
+                  - message
+                  - elastic_agent.id
+                  - elastic_agent.process
+                  - elastic_agent.version
+                  - component.id
+                  - component.type
+                  - component.binary
+                  - component.state
+                  - component.old_state
+                  - unit.id
+                  - unit.type
+                  - unit.state
+                  - unit.old_state
       policy:
         _meta:
           managed: true
@@ -1988,15 +2038,31 @@ elasticsearch:
         template:
           settings:
             index:
+              codec: best_compression
               lifecycle:
                 name: so-logs-endpoint.diagnostic.collection-logs
               mapping:
                 total_fields:
                   limit: 5000
+                ignore_malformed: true
               number_of_replicas: 0
               sort:
                 field: '@timestamp'
                 order: desc
+              query:
+                default_field:
+                  - ecs.version
+                  - event.action
+                  - event.category
+                  - event.code
+                  - event.dataset
+                  - event.hash
+                  - event.id
+                  - event.kind
+                  - event.module
+                  - event.outcome
+                  - event.provider
+                  - event.type
       policy:
         _meta:
           managed: true
