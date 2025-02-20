@@ -22,7 +22,7 @@ kibana:
           - default
           - file
     migrations:
-      discardCorruptObjects: "8.17.1"
+      discardCorruptObjects: "8.17.2"
     telemetry:
       enabled: False
     security:
