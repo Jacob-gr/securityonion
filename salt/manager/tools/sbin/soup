@@ -763,6 +763,9 @@ up_to_2.4.130() {
   # Integrations policies need to be updated
   rm -f /opt/so/state/eaintegrations.txt
 
+  # Ensure override exists to allow nmcli access to other devices
+  touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+
   INSTALLEDVERSION=2.4.130
 }
 
