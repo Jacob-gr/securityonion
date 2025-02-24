@@ -537,6 +537,10 @@ post_to_2.4.120() {
 }
 
 post_to_2.4.130() {
+  # Optional integrations are loaded AFTER initial successful load of core ES templates (/opt/so/state/estemplates.txt)
+  #   Dynamic templates are created in elasticsearch.enabled for every optional integration based on output of so-elastic-fleet-optional-integrations-load script
+  echo "Ensuring Elasticsearch templates are up to date after updating package registry"
+  salt-call state.apply elasticsearch queue=True
 
   # Update kibana default space
   salt-call state.apply kibana.config queue=True
