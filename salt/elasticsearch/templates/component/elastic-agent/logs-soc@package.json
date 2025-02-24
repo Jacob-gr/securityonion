@@ -1,0 +1,7 @@
+{
+    "package": {
+      "name": "log"
+    },
+    "managed_by": "fleet",
+    "managed": true
+}
