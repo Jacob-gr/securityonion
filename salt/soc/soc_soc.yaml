@@ -397,7 +397,7 @@ soc:
                 label: License
               - field: repo
                 label: Repo
-              helpLink: sigma.html
+            helpLink: sigma.html
             airgap: *serulesRepos
         suricataengine:
           aiRepoUrl:
