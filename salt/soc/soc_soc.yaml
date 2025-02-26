@@ -60,7 +60,7 @@ soc:
       - warn
       - error
     actions:
-      description: A list of actions a user can take from the SOC UI against a hunt, alert, and other records. The action must be defined in JSON object format, and contain a "name" key and "links" key. The links is a list of URLs, where the most suitable URL in the list will be the selected URL when the user clicks the action.
+      description: A list of actions a user can take from the SOC UI against a hunt, alert, and other records. 
       global: True
       syntax: json
       forcedType: "[]{}"
@@ -265,6 +265,14 @@ soc:
               global: True
               advanced: True
               forcedType: "[]{}"
+              syntax: json
+              uiElements:
+              - field: community
+                label: Community
+              - field: license
+                label: License
+              - field: repo
+                label: Repo
               helpLink: sigma.html
             airgap: *eerulesRepos
           sigmaRulePackages:
@@ -381,6 +389,15 @@ soc:
               advanced: True
               forcedType: "[]{}"
               helpLink: yara.html
+              syntax: json
+              uiElements:
+              - field: community
+                label: Community
+              - field: license
+                label: License
+              - field: repo
+                label: Repo
+              helpLink: sigma.html
             airgap: *serulesRepos
         suricataengine:
           aiRepoUrl:
@@ -473,10 +490,18 @@ soc:
           description: List of external tools to remove from the SOC UI.
           global: True
         tools:
-          description: List of available external tools visible in the SOC UI. Each tool is defined in JSON object notation, and must include the "name" key and "link" key, where the link is the tool's URL.
+          description: List of available external tools visible in the SOC UI. 
           global: True
           advanced: True
           forcedType: "[]{}"
+          syntax: json
+          uiElements:
+          - field: description
+            label: Description
+          - field: icon
+            label: Icon
+          - field: link
+            label: Link
         hunt: &appSettings
           groupItemsPerPage:
             description: Default number of aggregations to show per page. Larger values consume more vertical area in the SOC UI.
@@ -503,11 +528,25 @@ soc:
             description: List of default queries to show in the query list. Each query is represented in JSON object notation, and must include the "name" key and "query" key.
             global: True
             forcedType: "[]{}"
+            syntax: json
+            uiElements:
+            - field: name
+              label: Name
+            - field: query
+              label: Query
           queryToggleFilters:
             description: Customize togglable query filters that apply to all queries. Exclusive toggles will invert the filter if toggled off rather than omitting the filter from the query.
             global: True
             advanced: True
             forcedType: "[]{}"
+            syntax: json
+            uiElements:
+            - field: enabled
+              label: Enabled
+            - field: filter
+              label: Filter
+            - field: name
+              label: Name
         alerts:
           <<: *appSettings
           maxBulkEscalateEvents:
