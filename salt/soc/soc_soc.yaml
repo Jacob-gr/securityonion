@@ -525,7 +525,7 @@ soc:
             description: Number of items to show in the most recently used queries list. Larger values cause default queries to be located further down the list.
             global: True
           queries:
-            description: List of default queries to show in the query list. Each query is represented in JSON object notation, and must include the "name" key and "query" key.
+            description: List of default queries to show in the query list. All entries must include the "name" key and "query" key.
             global: True
             forcedType: "[]{}"
             syntax: json
