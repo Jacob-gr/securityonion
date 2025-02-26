@@ -1,4 +1,5 @@
 elastic_fleet_package_registry:
   enabled:
+    forcedType: bool
     description: Enables or disables the Fleet package registry process. This process must remain enabled to allow Elastic Agent packages to be updated.
     advanced: True
