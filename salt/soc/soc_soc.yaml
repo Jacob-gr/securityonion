@@ -63,6 +63,13 @@ soc:
       description: A list of actions a user can take from the SOC UI against a hunt, alert, and other records. The action must be defined in JSON object format, and contain a "name" key and "links" key. The links is a list of URLs, where the most suitable URL in the list will be the selected URL when the user clicks the action.
       global: True
       forcedType: "[]{}"
+      uiElements:
+      - field: description
+        label: Description
+      - field: icon
+        label: Icon
+      - field: links
+        label: Links
     eventFields:
       default: &eventFields
         description: Event fields mappings are defined by the format ":event.module:event.dataset". For example, to customize which fields show for 'syslog' events originating from 'zeek', find the eventField item in the left panel that looks like ':zeek:syslog'. The 'default' entry is used for all events that do not match an existing mapping defined in the list to the left.
