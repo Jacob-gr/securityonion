@@ -494,7 +494,7 @@ soc:
           queries:
             description: List of default queries to show in the query list. Each query is represented in JSON object notation, and must include the "name" key and "query" key.
             global: True
-            forcedType: "[]{}"
+            forcedType: json
             uiElements:
             - field: name
               label: Name
@@ -506,6 +506,7 @@ soc:
               required: True
             - field: showSubtitle
               label: Show Query in Dropdown. Must be true or false
+              regex: ^(true|false)$
           queryToggleFilters:
             description: Customize togglable query filters that apply to all queries. Exclusive toggles will invert the filter if toggled off rather than omitting the filter from the query.
             global: True
