@@ -81,7 +81,8 @@ soc:
         label: Target (_blank, _self, mynewtab)
       - field: categories
         label: Categories
-        multiline: True        
+        multiline: True  
+        forcedType: "[]string"      
     eventFields:
       default: &eventFields
         description: Event fields mappings are defined by the format ":event.module:event.dataset". For example, to customize which fields show for 'syslog' events originating from 'zeek', find the eventField item in the left panel that looks like ':zeek:syslog'. The 'default' entry is used for all events that do not match an existing mapping defined in the list to the left.
