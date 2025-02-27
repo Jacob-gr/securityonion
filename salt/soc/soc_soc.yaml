@@ -65,12 +65,19 @@ soc:
       syntax: json
       forcedType: "[]{}"
       uiElements:
+      - field: name
+        label: Name
+        required: True
       - field: description
         label: Description
       - field: icon
         label: Icon
       - field: links
         label: Links
+        multiline: True
+        required: True
+      - field: target
+        label: Target (_blank, _self, mynewtab)        
     eventFields:
       default: &eventFields
         description: Event fields mappings are defined by the format ":event.module:event.dataset". For example, to customize which fields show for 'syslog' events originating from 'zeek', find the eventField item in the left panel that looks like ':zeek:syslog'. The 'default' entry is used for all events that do not match an existing mapping defined in the list to the left.
