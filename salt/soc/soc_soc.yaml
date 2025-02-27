@@ -494,7 +494,8 @@ soc:
           queries:
             description: List of default queries to show in the query list. Each query is represented in JSON object notation, and must include the "name" key and "query" key.
             global: True
-            forcedType: json
+            forcedType: "[]{}"
+            syntax: json
             uiElements:
             - field: name
               label: Name
