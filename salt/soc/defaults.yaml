@@ -83,7 +83,7 @@ soc:
         icon: fa-users-between-lines
         target: ''
         links:
-          - '/#/hunt?q=({:process.entity_id}) | groupby event.dataset | groupby -sankey event.dataset event.action | groupby event.action | groupby process.name | groupby process.command_line | groupby host.name user.name | groupby source.ip source.port destination.ip destination.port | groupby dns.question.name | groupby dns.answers.data | groupby file.path | groupby registry.path | groupby dll.path'
+          - '/#/hunt?q="{:process.entity_id}" | groupby event.dataset | groupby -sankey event.dataset event.action | groupby event.action | groupby process.name | groupby process.command_line | groupby host.name user.name | groupby source.ip source.port destination.ip destination.port | groupby dns.question.name | groupby dns.answers.data | groupby file.path | groupby registry.path | groupby dll.path'
       - name: actionProcessAncestors
         description: actionProcessAncestorsHelp
         icon: fa-people-roof
