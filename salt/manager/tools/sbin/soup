@@ -533,18 +533,22 @@ post_to_2.4.120() {
   # Manually rollover suricata alerts index to ensure data_stream.dataset expected mapping is set to 'suricata'
   rollover_index "logs-suricata.alerts-so"
 
-  echo "Regenerating Elastic Agent Installers"
-  /sbin/so-elastic-agent-gen-installers
-
   POSTVERSION=2.4.120
 }
 
 post_to_2.4.130() {
+  # Optional integrations are loaded AFTER initial successful load of core ES templates (/opt/so/state/estemplates.txt)
+  #   Dynamic templates are created in elasticsearch.enabled for every optional integration based on output of so-elastic-fleet-optional-integrations-load script
+  echo "Ensuring Elasticsearch templates are up to date after updating package registry"
+  salt-call state.apply elasticsearch queue=True
 
   # Update kibana default space
   salt-call state.apply kibana.config queue=True
   echo "Updating Kibana default space"
   /usr/sbin/so-kibana-space-defaults
+
+  echo "Regenerating Elastic Agent Installers"
+  /sbin/so-elastic-agent-gen-installers
 
   POSTVERSION=2.4.130
 }
@@ -757,11 +761,11 @@ up_to_2.4.120() {
 }
 
 up_to_2.4.130() {
+  # Remove any old Elastic Defend config files
+  rm -f /opt/so/conf/elastic-fleet/integrations/endpoints-initial/elastic-defend-endpoints.json
+
   # Elastic Update for this release, so download Elastic Agent files
   determine_elastic_agent_upgrade
-
-  # Integrations policies need to be updated
-  rm -f /opt/so/state/eaintegrations.txt
 
   # Ensure override exists to allow nmcli access to other devices
   touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
