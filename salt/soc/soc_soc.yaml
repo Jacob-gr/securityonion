@@ -65,6 +65,9 @@ soc:
       forcedType: "[]{}"
       syntax: json
       uiElements:
+      - field: name
+        label: Name
+        required: True
       - field: description
         label: Description
       - field: icon
@@ -74,9 +77,6 @@ soc:
         required: True
         forcedType: "[]string"
         multiline: True
-      - field: name
-        label: Name
-        required: True
       - field: target
         label: Target
       - field: jscall
