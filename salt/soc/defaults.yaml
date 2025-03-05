@@ -1900,7 +1900,7 @@ soc:
               query: 'event.module:endpoint | groupby event.dataset | groupby host.name | groupby -sankey host.name user.name | groupby user.name | groupby -sankey user.name process.name | groupby process.name'
             - name: Elastic Agent API Events
               description: API (Application Programming Interface) events from Elastic Agents
-              query: 'event.dataset:endpoint.events.api | groupby host.name | groupby -sankey host.name user.name | groupby user.name | groupby -sankey user.name process.name | groupby process.name | groupby process.Ext.api.name'
+              query: 'event.dataset:endpoint.events.api | groupby host.name | groupby -sankey host.name user.name | groupby user.name | groupby -sankey user.name process.name | groupby process.name | groupby -sankey process.name process.Ext.api.name | groupby process.Ext.api.name'
             - name: Elastic Agent File Events
               description: File events from Elastic Agents
               query: 'event.dataset:endpoint.events.file | groupby host.name | groupby -sankey host.name user.name | groupby user.name | groupby -sankey user.name process.name | groupby process.name | groupby event.action | groupby file.path'
