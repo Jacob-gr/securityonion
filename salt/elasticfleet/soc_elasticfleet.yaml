@@ -3,7 +3,6 @@ elasticfleet:
     description: Enables or disables the Elastic Fleet process. This process is critical for managing Elastic Agents.
     advanced: True
     helpLink: elastic-fleet.html
-    forcedType: bool
   enable_manager_output:
     description: Setting this option to False should only be considered if there is at least one receiver node in the grid. If True, Elastic Agent will send events to the manager and receivers. If False, events will only be send to the receivers.
     advanced: True
