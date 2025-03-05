@@ -2702,7 +2702,8 @@ elasticsearch:
         template:
           settings:
             lifecycle:
-              so-logs-osquery-manager.action.responses-logs
+              name:
+                so-logs-osquery-manager.action.responses-logs
             index:
               number_of_replicas: 0
       policy:
