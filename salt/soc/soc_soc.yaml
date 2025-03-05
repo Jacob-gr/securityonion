@@ -506,8 +506,8 @@ soc:
               label: Query
               required: True
             - field: showSubtitle
-              label: Show Query in Dropdown. Must be true or false
-              regex: ^(true|false)$
+              label: Show Query in Dropdown. 
+              forcedType: bool
           queryToggleFilters:
             description: Customize togglable query filters that apply to all queries. Exclusive toggles will invert the filter if toggled off rather than omitting the filter from the query.
             global: True
