@@ -71,7 +71,7 @@ soc:
       - field: description
         label: Description
       - field: icon
-        label: Icon Example: fa-shuttle-space
+        label: Icon (Example - fa-shuttle-space)
       - field: links
         label: Links
         required: True
