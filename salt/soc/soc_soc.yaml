@@ -60,7 +60,7 @@ soc:
       - warn
       - error
     actions:
-      description: A list of actions a user can take from the SOC UI against a hunt, alert, and other records. The action must be defined in JSON object format, and contain a "name" key and "links" key. The links is a list of URLs, where the most suitable URL in the list will be the selected URL when the user clicks the action.
+      description: A list of actions a user can take from the SOC UI against a hunt, alert, and other records. The links is a list of URLs, where the most suitable URL in the list will be the selected URL when the user clicks the action.
       global: True
       forcedType: "[]{}"
       syntax: json
@@ -517,7 +517,7 @@ soc:
             description: Number of items to show in the most recently used queries list. Larger values cause default queries to be located further down the list.
             global: True
           queries:
-            description: List of default queries to show in the query list. Each query is represented in JSON object notation, and must include the "name" key and "query" key.
+            description: List of default queries to show in the query list.
             global: True
             forcedType: "[]{}"
             syntax: json
