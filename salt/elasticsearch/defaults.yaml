@@ -2742,7 +2742,7 @@ elasticsearch:
         - logs-osquery_manager.actions
         ignore_missing_component_templates: []
         index_patterns:
-        - .logs-osquery_manager.actions*
+        - .logs-osquery_manager.actions-*
         priority: 501
         template:
           settings:
