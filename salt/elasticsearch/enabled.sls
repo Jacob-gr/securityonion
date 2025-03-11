@@ -116,6 +116,7 @@ escomponenttemplates:
     - clean: True
     - onchanges_in:
       - file: so-elasticsearch-templates-reload
+    - show_changes: False
       
 # Auto-generate templates from defaults file
 {%     for index, settings in ES_INDEX_SETTINGS.items() %}
@@ -127,6 +128,7 @@ es_index_template_{{index}}:
     - defaults:
       TEMPLATE_CONFIG: {{ settings.index_template }}
     - template: jinja
+    - show_changes: False
     - onchanges_in:
       - file: so-elasticsearch-templates-reload
 {%       endif %}
@@ -146,12 +148,13 @@ es_template_{{TEMPLATE.split('.')[0] | replace("/","_") }}:
 {%         endif %}
     - user: 930
     - group: 939
+    - show_changes: False
     - onchanges_in:
       - file: so-elasticsearch-templates-reload
 {%       endfor %}
 {%     endif %}
 
-{% if GLOBALS.role in GLOBALS.manager_roles %}
+{%     if GLOBALS.role in GLOBALS.manager_roles %}
 so-es-cluster-settings:
   cmd.run:
     - name: /usr/sbin/so-elasticsearch-cluster-settings
@@ -160,7 +163,7 @@ so-es-cluster-settings:
     - require:
       - docker_container: so-elasticsearch
       - file: elasticsearch_sbin_jinja
-{% endif %}
+{%     endif %}
 
 so-elasticsearch-ilm-policy-load:
   cmd.run:

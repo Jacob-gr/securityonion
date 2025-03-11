@@ -14,6 +14,7 @@ include:
   - manager.sync_es_users
   - manager.elasticsearch
   - manager.kibana
+  - manager.managed_soc_annotations
 
 repo_log_dir:
   file.directory:
@@ -65,6 +66,7 @@ repo_dir:
     - recurse:
       - user
       - group
+    - show_changes: False
 
 manager_sbin:
   file.recurse:
@@ -75,6 +77,7 @@ manager_sbin:
     - file_mode: 755
     - exclude_pat:
       - "*_test.py"
+    - show_changes: False
 
 manager_sbin_jinja:
   file.recurse:
@@ -84,6 +87,7 @@ manager_sbin_jinja:
     - group: socore
     - file_mode: 755
     - template: jinja
+    - show_changes: False
 
 so-repo-file:
   file.managed:
@@ -91,6 +95,7 @@ so-repo-file:
     - source: salt://manager/files/repodownload.conf
     - user: socore
     - group: socore
+    - show_changes: False
 
 so-repo-mirrorlist:
   file.managed:
