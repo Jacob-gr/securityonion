@@ -89,7 +89,7 @@ function manage_user() {
       add)
         email=$(echo "$request" | jq -r .email)
         password=$(echo "$request" | jq -r .password)
-        perm=$(echo "$request" | jq -r .role)
+        role=$(echo "$request" | jq -r .role)
         firstName=$(echo "$request" | jq -r .firstName)
         lastName=$(echo "$request" | jq -r .lastName)
         note=$(echo "$request" | jq -r .note)
