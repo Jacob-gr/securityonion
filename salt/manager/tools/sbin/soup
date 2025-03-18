@@ -407,6 +407,7 @@ preupgrade_changes() {
     [[ "$INSTALLEDVERSION" == 2.4.110 ]] && up_to_2.4.111
     [[ "$INSTALLEDVERSION" == 2.4.111 ]] && up_to_2.4.120
     [[ "$INSTALLEDVERSION" == 2.4.120 ]] && up_to_2.4.130
+    [[ "$INSTALLEDVERSION" == 2.4.130 ]] && up_to_2.4.140
     true
 }
 
@@ -431,6 +432,7 @@ postupgrade_changes() {
     [[ "$POSTVERSION" == 2.4.110 ]] && post_to_2.4.111
     [[ "$POSTVERSION"  == 2.4.111 ]] && post_to_2.4.120
     [[ "$POSTVERSION"  == 2.4.120 ]] && post_to_2.4.130
+    [[ "$POSTVERSION"  == 2.4.130 ]] && post_to_2.4.140
     true
 }
 
@@ -551,6 +553,11 @@ post_to_2.4.130() {
   /sbin/so-elastic-agent-gen-installers
 
   POSTVERSION=2.4.130
+}
+
+post_to_2.4.140() {
+  echo "Nothing to apply"
+  POSTVERSION=2.4.140
 }
 
 repo_sync() {
@@ -771,6 +778,12 @@ up_to_2.4.130() {
   touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 
   INSTALLEDVERSION=2.4.130
+}
+
+up_to_2.4.140() {
+  echo "Nothing to do for 2.4.140"
+
+  INSTALLEDVERSION=2.4.140
 }
 
 add_hydra_pillars() {
