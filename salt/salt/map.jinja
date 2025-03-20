@@ -9,11 +9,11 @@
 
 {% if grains.os_family == 'Debian' %}
   {% set SPLITCHAR = '+' %}
-  {% set SALTPACKAGES = ['salt-common', 'salt-master', 'salt-minion', 'salt-cloud'] %}
+  {% set SALTPACKAGES = ['salt-common', 'salt-master', 'salt-minion'] %}
   {% set SYSTEMD_UNIT_FILE = '/lib/systemd/system/salt-minion.service' %}
 {% else %}
   {% set SPLITCHAR = '-' %}
-  {% set SALTPACKAGES = ['salt', 'salt-master', 'salt-minion', 'salt-cloud'] %}
+  {% set SALTPACKAGES = ['salt', 'salt-master', 'salt-minion'] %}
   {% set SYSTEMD_UNIT_FILE = '/usr/lib/systemd/system/salt-minion.service' %}
 {% endif %}
 
