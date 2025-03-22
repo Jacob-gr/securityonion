@@ -1439,6 +1439,9 @@ main() {
     # Stop long-running scripts to allow potentially updated scripts to load on the next execution.
     killall salt-relay.sh
 
+    # ensure the mine is updated and populated before highstates run, following the salt-master restart
+    update_salt_mine
+
     highstate
     postupgrade_changes
     [[ $is_airgap -eq 0 ]] && unmount_update
