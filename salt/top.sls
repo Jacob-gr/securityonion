@@ -22,11 +22,7 @@ base:
     - salt.minion-state-apply-test
     - salt.minion
 
-  '*_eval or *_manager* or *_standalone or *_import and I@node_data:False':
-    - match: compound
-    - mine.update
-
-  '* and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '* and G@saltversion:{{saltversion}}':
     - match: compound
     - salt.minion
     - patch.os.schedule
@@ -37,21 +33,9 @@ base:
     - docker
     - docker_clean
 
-  '*_sensor and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_manager* or *_standalone or *_eval or *_import and I@node_data:False':
     - match: compound
-    - sensor
-    - ssl
-    - sensoroni
-    - telegraf
-    - firewall
-    - nginx
-    - pcap
-    - suricata
-    - healthcheck
-    - zeek
-    - strelka
-    - elasticfleet.install_agent_grid
-    - stig
+    - mine.update
 
   '*_eval and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
@@ -84,37 +68,6 @@ base:
     - elastalert
     - utility
     - elasticfleet
-
-  '*_manager and G@saltversion:{{saltversion}} and not I@node_data:False':
-    - match: compound
-    - salt.master
-    - ca
-    - ssl
-    - registry
-    - nginx
-    - influxdb
-    - strelka.manager
-    - soc
-    - kratos
-    - hydra
-    - firewall
-    - manager
-    - sensoroni
-    - telegraf
-    - backup.config_backup
-    - idstools
-    - suricata.manager
-    - elasticsearch
-    - logstash
-    - redis
-    - elastic-fleet-package-registry
-    - kibana
-    - curator.disabled
-    - elastalert
-    - utility
-    - elasticfleet
-    - stig
-    - kafka
 
   '*_standalone and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
@@ -152,16 +105,34 @@ base:
     - stig
     - kafka
 
-  '*_searchnode and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_manager and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
-    - firewall
+    - salt.master
+    - ca
     - ssl
-    - elasticsearch
-    - logstash
+    - registry
+    - nginx
+    - influxdb
+    - strelka.manager
+    - soc
+    - kratos
+    - hydra
+    - firewall
+    - manager
     - sensoroni
     - telegraf
-    - nginx
-    - elasticfleet.install_agent_grid
+    - backup.config_backup
+    - idstools
+    - suricata.manager
+    - elasticsearch
+    - logstash
+    - redis
+    - elastic-fleet-package-registry
+    - kibana
+    - curator.disabled
+    - elastalert
+    - utility
+    - elasticfleet
     - stig
     - kafka
 
@@ -196,25 +167,6 @@ base:
     - stig
     - kafka
 
-  '*_heavynode and G@saltversion:{{saltversion}} and not I@node_data:False':
-    - match: compound
-    - sensor
-    - ssl
-    - sensoroni
-    - telegraf
-    - nginx
-    - firewall
-    - elasticsearch
-    - logstash
-    - redis
-    - curator.disabled
-    - strelka
-    - pcap
-    - suricata
-    - zeek
-    - elasticfleet.install_agent_grid
-    - elasticagent
-
   '*_import and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
     - salt.master
@@ -243,7 +195,55 @@ base:
     - zeek
     - elasticfleet
 
-  '*_receiver and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_searchnode and G@saltversion:{{saltversion}}':
+    - match: compound
+    - firewall
+    - ssl
+    - elasticsearch
+    - logstash
+    - sensoroni
+    - telegraf
+    - nginx
+    - elasticfleet.install_agent_grid
+    - stig
+    - kafka
+
+  '*_sensor and G@saltversion:{{saltversion}}':
+    - match: compound
+    - sensor
+    - ssl
+    - sensoroni
+    - telegraf
+    - firewall
+    - nginx
+    - pcap
+    - suricata
+    - healthcheck
+    - zeek
+    - strelka
+    - elasticfleet.install_agent_grid
+    - stig
+
+  '*_heavynode and G@saltversion:{{saltversion}}':
+    - match: compound
+    - sensor
+    - ssl
+    - sensoroni
+    - telegraf
+    - nginx
+    - firewall
+    - elasticsearch
+    - logstash
+    - redis
+    - curator.disabled
+    - strelka
+    - pcap
+    - suricata
+    - zeek
+    - elasticfleet.install_agent_grid
+    - elasticagent
+
+  '*_receiver and G@saltversion:{{saltversion}}':
     - match: compound
     - ssl
     - sensoroni
@@ -255,7 +255,7 @@ base:
     - kafka
     - stig
 
-  '*_idh and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_idh and G@saltversion:{{saltversion}}':
     - match: compound
     - ssl
     - sensoroni
@@ -264,7 +264,7 @@ base:
     - elasticfleet.install_agent_grid
     - idh
 
-  '*_fleet and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_fleet and G@saltversion:{{saltversion}}':
     - match: compound
     - ssl
     - sensoroni
@@ -276,7 +276,7 @@ base:
     - elasticfleet.install_agent_grid
     - schedule
 
-  '*_desktop and G@saltversion:{{saltversion}} and not I@node_data:False':
+  '*_desktop and G@saltversion:{{saltversion}}':
     - ssl
     - sensoroni
     - telegraf
