@@ -17,12 +17,17 @@ base:
     - schedule
     - logrotate
 
-  'not G@saltversion:{{saltversion}}':
+  'I@node_data:False and ( *_manager* or *_eval or *_import or *_standalone )':
+    - match: compound
+    - salt.minion
+    - mine.update
+
+  'not G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
     - salt.minion-state-apply-test
     - salt.minion
 
-  '* and G@saltversion:{{saltversion}}':
+  '* and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
     - salt.minion
     - patch.os.schedule
@@ -32,10 +37,6 @@ base:
     - common
     - docker
     - docker_clean
-
-  '*_manager* or *_standalone or *_eval or *_import and I@node_data:False':
-    - match: compound
-    - mine.update
 
   '*_eval and G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound

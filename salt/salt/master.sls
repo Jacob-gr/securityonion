@@ -3,7 +3,6 @@
 
 include:
   - salt.minion
-  - salt.master.reactor_config_mine_update
 
 hold_salt_master_package:
   module.run:
