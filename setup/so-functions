@@ -1960,11 +1960,8 @@ salt_install_module_deps() {
 }
 
 salt_patch_x509_v2() {
-	# this can be removed when https://github.com/saltstack/salt/issues/64195 is resolved
-	if [ $SALTVERSION == "3006.1" ]; then
-		info "Salt version 3006.1 found. Patching /opt/saltstack/salt/lib/python3.10/site-packages/salt/states/x509_v2.py"
-		\cp -v ./files/patch/states/x509_v2.py /opt/saltstack/salt/lib/python3.10/site-packages/salt/states/x509_v2.py
-	fi
+	# this can be removed when https://github.com/saltstack/salt/issues/66929 is resolved
+	logCmd "salt-call state.apply salt.patch.x509_v2 --local --file-root=../salt/"
 }
 
 # Create an secrets pillar so that passwords survive re-install
