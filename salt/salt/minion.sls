@@ -8,6 +8,7 @@
 
 include:
   - salt.python_modules
+  - salt.patch.x509_v2
   - salt
   - systemd.reload
   - repo.client
