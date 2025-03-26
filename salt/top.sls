@@ -20,7 +20,7 @@ base:
   'I@node_data:False and ( *_manager* or *_eval or *_import or *_standalone )':
     - match: compound
     - salt.minion
-    - mine.update
+    - salt.master.mine_update_highstate
 
   'not G@saltversion:{{saltversion}} and not I@node_data:False':
     - match: compound
