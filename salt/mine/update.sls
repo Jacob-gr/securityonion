@@ -22,5 +22,3 @@ mine.update.run_highstate_on_{{ MINION_ID }}:
     - tgt: {{ MINION_ID }}
     - highstate: True
     - concurrent: True
-    - require:
-        - salt: mine.update.update_mine_all_minions
