@@ -564,15 +564,14 @@ post_to_2.4.140() {
   POSTVERSION=2.4.140
 }
 
-<<<<<<< HEAD
-post_to_2.4.150() {
-  echo "Nothing to apply"
-  POSTVERSION=2.4.150
-=======
 post_to_2.4.141() {
   echo "Nothing to apply"
   POSTVERSION=2.4.141
->>>>>>> 2.4/main
+}
+
+post_to_2.4.150() {
+  echo "Nothing to apply"
+  POSTVERSION=2.4.150
 }
 
 repo_sync() {
@@ -801,17 +800,15 @@ up_to_2.4.140() {
   INSTALLEDVERSION=2.4.140
 }
 
-<<<<<<< HEAD
-up_to_2.4.150() {
-  echo "Nothing to do for 2.4.150"
-
-  INSTALLEDVERSION=2.4.150
-=======
 up_to_2.4.141() {
   echo "Nothing to do for 2.4.141"
 
   INSTALLEDVERSION=2.4.141
->>>>>>> 2.4/main
+
+up_to_2.4.150() {
+  echo "Nothing to do for 2.4.150"
+
+  INSTALLEDVERSION=2.4.150
 }
 
 add_hydra_pillars() {
