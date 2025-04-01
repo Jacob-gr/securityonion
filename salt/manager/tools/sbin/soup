@@ -804,7 +804,7 @@ up_to_2.4.141() {
   echo "Nothing to do for 2.4.141"
 
   INSTALLEDVERSION=2.4.141
-
+}
 up_to_2.4.150() {
   echo "Nothing to do for 2.4.150"
 
