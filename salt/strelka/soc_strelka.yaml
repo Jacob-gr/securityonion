@@ -70,8 +70,8 @@ strelka:
             global: False
             helpLink: strelka.html
             advanced: True
-            type: json
-            multiline: True
+            forcedType: "[]{}"
+            syntax: json
           'ScanBatch': *scannerOptions
           'ScanBzip2': *scannerOptions
           'ScanDocx': *scannerOptions
