@@ -92,6 +92,10 @@ soc:
         - PATCH
         - POST
         - PUT
+      - field: options
+        label: XHR Options (JSON)
+        multiline: True
+        forcedType: "{}"
       - field: body
         label: XHR Content
       - field: encodeBody
