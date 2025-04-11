@@ -3,7 +3,7 @@
 {%- set valid_users = [] -%}
 
 {%- for item, user in KAFKA_EXTERNAL_USERS.items() -%}
-{%   if 'password' in user and user.password is not none and user.password != "" -%}
+{%   if 'password' in user and user.password is not none and user.password.strip() != "" -%}
 {%     do valid_users.append('user_' ~ user.username ~ '="' ~ user.password ~ '"') -%}
 {%   endif -%}
 {%- endfor -%}
