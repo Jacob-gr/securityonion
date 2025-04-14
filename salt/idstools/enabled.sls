@@ -55,7 +55,7 @@ so-idstools:
     {% endif %}
     - watch:
       - file: idstoolsetcsync
-      - file: idstools_sbin_jinja
+      - file: idstools_so-rule-update
 
 delete_so-idstools_so-status.disabled:
   file.uncomment:
@@ -77,7 +77,7 @@ run_so-rule-update:
     - require:
       - docker_container: so-idstools
     - onchanges:
-      - file: idstools_sbin_jinja
+      - file: idstools_so-rule-update
       - file: idstoolsetcsync
       - file: synclocalnidsrules
     - order: last
