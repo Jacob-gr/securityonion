@@ -34,10 +34,6 @@ kafka:
       sensitive: True
       helpLink: kafka.html
     broker:
-      advertised_x_listeners:
-        description: Specify the list of listeners (hostname and port) that Kafka brokers provide to clients for communication.
-        title: advertised.listeners
-        helpLink: kafka.html
       auto_x_create_x_topics_x_enable:
         description: Enable the auto creation of topics.
         title: auto.create.topics.enable
@@ -227,3 +223,51 @@ kafka:
         title: process.roles
         readonly: True
         helpLink: kafka.html
+    external_access:
+      enabled:
+        description: Enables or disables access to Kafka topics using user/password authentication. Used for producing / consuming messages via an external client.
+        forcedType: bool
+        helpLink: kafka.html
+      listeners:
+        description: Set of URIs that is listened on and the listener names in a comma-seperated list.
+        title: listeners
+        readonly: True
+        advanced: True
+        helpLink: kafka.html
+      listener_x_security_x_protocol_x_map:
+        description: External listener name and mapped security protocol.
+        title: listener.security.protocol.map
+        readonly: True
+        advanced: True
+        helpLink: kafka.html
+      sasl_x_enabled_x_mechanisms:
+        description: SASL/PLAIN is a simple username/password authentication mechanism, used with TLS to implement secure authentication.
+        title: sasl.enabled.mechanisms
+        readonly: True
+        advanced: True
+        helpLink: kafka.html
+      sasl_x_mechanism_x_inter_x_broker_x_protocol:
+        description: SASL mechanism used for inter-broker communication
+        title: sasl.mechanism.inter.broker.protocol
+        readonly: True
+        advanced: True
+        helpLink: kafka.html
+      remote_users:
+        user01: &remote_user
+          username:
+            description: Username to be used for custom account
+            forcedType: string
+            global: True
+          password:
+            description: Password to be used for custom account
+            forcedType: string
+            global: True
+            sensitive: True
+        user02: *remote_user
+        user03: *remote_user
+        user04: *remote_user
+        user05: *remote_user
+        user06: *remote_user
+        user07: *remote_user
+        user08: *remote_user
+        user09: *remote_user
