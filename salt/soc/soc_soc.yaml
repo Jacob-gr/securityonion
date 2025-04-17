@@ -150,8 +150,8 @@ soc:
         uiElements:
         - field: id
           label: Unique Subgrid ID
-          regex: "^(?!\s*all\s*$).*$"
-          regexFailureMessage: Subgrid ID cannot be named 'all'
+          regex: "^_.*$"
+          regexFailureMessage: Subgrid ID cannot start with an underscore
           required: true
         - field: managerUrl
           label: Subgrid Manager URL
