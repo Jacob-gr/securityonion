@@ -141,7 +141,7 @@ soc:
       subgrids:
         title: Subordinate Grids
         description: |
-          Optional list of *subgrids* that this grid has access to manage. This is also known as a 'Manager of Managers' configuration. The values entered must originate from the remote subordinate grid. The API Client must be granted most permissions in order to perform required duties.
+          Optional list of *subgrids* that this grid has access to manage. This is also known as a 'Manager of Managers' configuration. The values entered must originate from the remote subordinate grid. The API Client must be granted most permissions in order to perform required functions.
 
           *Requires a valid Security Onion license key with subgrid allocations.*
         global: True
