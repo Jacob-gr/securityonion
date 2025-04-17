@@ -126,7 +126,7 @@ function testMinion() {
 }
 
 function restartMinion() {
-	salt "$MINION_ID" system.reboot
+	salt "$MINION_ID" system.reboot --async
 	result=$?
 
 	exit $result
