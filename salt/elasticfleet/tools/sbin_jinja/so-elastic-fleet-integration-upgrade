@@ -5,7 +5,7 @@
 # Elastic License 2.0.
 {%- import_yaml 'elasticfleet/defaults.yaml' as ELASTICFLEETDEFAULTS %}
 {%- set SUPPORTED_PACKAGES = salt['pillar.get']('elasticfleet:packages', default=ELASTICFLEETDEFAULTS.elasticfleet.packages, merge=True) %}
-{%- set AUTO_UPGRADE_INTEGRATIONS = salt['pillar.get']('elasticfleet:config:auto_upgrade_integrations', default=ELASTICFLEETDEFAULTS.elasticfleet.config.auto_upgrade_integrations) %}
+{%- set AUTO_UPGRADE_INTEGRATIONS = salt['pillar.get']('elasticfleet:config:auto_upgrade_integrations', default=false) %}
 
 . /usr/sbin/so-elastic-fleet-common
 

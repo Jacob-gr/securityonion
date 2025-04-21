@@ -48,6 +48,7 @@ elasticfleet:
     auto_upgrade_integrations:
       description: Enables or disables automatically upgrading Elastic Agent integrations.
       global: True
+      forcedType: bool
       helpLink: elastic-fleet.html
     server:
       custom_fqdn:
