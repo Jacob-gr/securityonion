@@ -151,9 +151,13 @@ so-elastic-fleet-integration-upgrade:
   cmd.run:
     - name: /usr/sbin/so-elastic-fleet-integration-upgrade
 
+{# CHECK THAT THIS STILL INSTALLS ALL INTEGRATIONS IN THE 2.4.130 SOUP #}
+{#  Subsequent runs should not modify the initially installed integration version.. until switch is flipped #}
+{%   if ELASTICFLEETMERGED.config.auto_upgrade_integrations %}
 so-elastic-fleet-addon-integrations:
   cmd.run:
     - name: /usr/sbin/so-elastic-fleet-optional-integrations-load
+{%   endif %}
 
 {%   if ELASTICFLEETMERGED.config.defend_filters.enable_auto_configuration %}
 so-elastic-defend-manage-filters-file-watch:
