@@ -17,7 +17,7 @@ kratoshome:
   file.directory:
     - name: /opt/so/conf/kratos
     - user: 928
-    - gid: 928
+    - group: 928
     - mode: 700
     - makedirs: True
 
@@ -27,11 +27,6 @@ kratos:
     - uid: 928
     - gid: 928
     - home: /opt/so/conf/kratos
-    - retry:
-        attempts: 5
-        until: True
-        interval: 60
-        splay: 10
 
 kratosdir:
   file.directory:

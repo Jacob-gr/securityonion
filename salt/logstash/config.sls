@@ -26,7 +26,7 @@ logstashhome:
   file.directory:
     - name: /opt/so/conf/logstash
     - user: 931
-    - gid: 931
+    - group: 931
     - mode: 700
     - makedirs: True
 
@@ -36,11 +36,6 @@ logstash:
     - uid: 931
     - gid: 931
     - home: /opt/so/conf/logstash
-    - retry:
-        attempts: 5
-        until: True
-        interval: 60
-        splay: 10
 
 lslibdir:
   file.absent:
