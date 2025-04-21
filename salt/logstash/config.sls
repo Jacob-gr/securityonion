@@ -28,6 +28,11 @@ logstash:
     - uid: 931
     - gid: 931
     - home: /opt/so/conf/logstash
+    - retry:
+        attempts: 5
+        until: True
+        interval: 60
+        splay: 10
 
 lslibdir:
   file.absent:
