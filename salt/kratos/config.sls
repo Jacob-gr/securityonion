@@ -19,7 +19,12 @@ kratos:
     - uid: 928
     - gid: 928
     - home: /opt/so/conf/kratos
-    
+    - retry:
+        attempts: 5
+        until: True
+        interval: 60
+        splay: 10
+
 kratosdir:
   file.directory:
     - name: /nsm/kratos
