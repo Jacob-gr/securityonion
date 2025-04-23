@@ -137,7 +137,7 @@ socore_own_saltstack_default:
       - group
 
 socore_own_saltstack_local:
-  file.managed:
+  file.directory:
     - name: /opt/so/saltstack/local
     - user: socore
     - group: socore
