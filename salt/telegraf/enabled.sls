@@ -37,7 +37,7 @@ so-telegraf:
       - /opt/so/conf/telegraf/node_config.json:/etc/telegraf/node_config.json:ro
       - /var/run/utmp:/var/run/utmp:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /:/host/root:ro
+      - /:/host:ro
       - /sys:/host/sys:ro
       - /proc:/host/proc:ro
       - /nsm:/host/nsm:ro
