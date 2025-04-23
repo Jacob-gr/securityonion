@@ -20,7 +20,6 @@ so-telegraf:
     - user: 939
     - group_add: 939,920
     - environment:
-      - HOST_PROC=/host/proc
       - HOST_ETC=/host/etc
       - HOST_SYS=/host/sys
       - HOST_MOUNT_PREFIX=/host
