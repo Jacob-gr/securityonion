@@ -60,7 +60,7 @@ tgraf_sync_escurl_conf:
     - user: 939
     - group: 939
     - mode: 400
-    - source: /opt/so/conf/elasticsearch/curl.config
+    - source: salt://elasticsearch/curl.config
 {% endif %}
 
 telegraf_sbin:
