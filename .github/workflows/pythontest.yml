@@ -1,10 +1,6 @@
 name: python-test
 
 on:
-  push:
-    paths: 
-      - "salt/sensoroni/files/analyzers/**"
-      - "salt/manager/tools/sbin"
   pull_request:
     paths:
       - "salt/sensoroni/files/analyzers/**"
