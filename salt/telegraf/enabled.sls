@@ -56,7 +56,7 @@ so-telegraf:
       - /opt/so/log/sostatus:/var/log/sostatus:ro
       - /opt/so/log/salt:/var/log/salt:ro
       - /opt/so/log/agents:/var/log/agents:ro
-      {% if GLOBALS.role in ['so-standalone', 'so-manager', 'so-managersearch', 'so-heavynode', 'so-eval', 'so-import'] %}
+      {% if GLOBALS.is_manager or GLOBALS.role == 'so-heavynode' %}
       - /opt/so/conf/telegraf/etc/escurl.config:/etc/telegraf/elasticsearch.config:ro
       {% endif %}
       {% if DOCKER.containers['so-telegraf'].custom_bind_mounts %}
