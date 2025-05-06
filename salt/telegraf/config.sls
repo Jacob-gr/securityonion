@@ -45,7 +45,7 @@ tgraf_sync_script_{{script}}:
         GLOBALS: {{ GLOBALS }}
 {% endfor %}
 
-{% if GLOBAS.is_manager or GLOBALS.role == 'so-heavynode' %}
+{% if GLOBALS.is_manager or GLOBALS.role == 'so-heavynode' %}
 tgraf_sync_script_esindexsize.sh:
   file.managed:
     - name: /opt/so/conf/telegraf/scripts/esindexsize.sh
