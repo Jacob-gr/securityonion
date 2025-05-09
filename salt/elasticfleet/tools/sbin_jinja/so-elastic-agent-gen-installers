@@ -88,3 +88,4 @@ rm -rf /nsm/elastic-agent-workspace
 
 printf "\n### Copying so_agent-installers to /nsm/elastic-fleet/ for nginx.\n"
 \cp -vr /opt/so/saltstack/local/salt/elasticfleet/files/so_agent-installers/ /nsm/elastic-fleet/
+chmod 644 /nsm/elastic-fleet/so_agent-installers/*
