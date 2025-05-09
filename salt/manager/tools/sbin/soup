@@ -560,9 +560,6 @@ post_to_2.4.130() {
   echo "Updating Kibana default space"
   /usr/sbin/so-kibana-space-defaults
 
-  echo "Regenerating Elastic Agent Installers"
-  /sbin/so-elastic-agent-gen-installers
-
   POSTVERSION=2.4.130
 }
 
@@ -577,7 +574,8 @@ post_to_2.4.141() {
 }
 
 post_to_2.4.150() {
-  echo "Nothing to apply"
+  echo "Regenerating Elastic Agent Installers"
+  /sbin/so-elastic-agent-gen-installers
   POSTVERSION=2.4.150
 }
 
