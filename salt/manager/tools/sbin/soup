@@ -579,6 +579,11 @@ post_to_2.4.150() {
   POSTVERSION=2.4.150
 }
 
+post_to_2.4.160() {
+  echo "Nothing to apply"
+  POSTVERSION=2.4.160
+}
+
 repo_sync() {
   echo "Sync the local repo."
   su socore -c '/usr/sbin/so-repo-sync' || fail "Unable to complete so-repo-sync."
@@ -814,6 +819,12 @@ up_to_2.4.150() {
   so-elasticsearch-query so-detection*/_settings -X PUT -d '{"index":{"refresh_interval":"1s"}}'
 
   INSTALLEDVERSION=2.4.150
+}
+
+up_to_2.4.160() {
+  echo "Nothing to do for 2.4.160"
+
+  INSTALLEDVERSION=2.4.160
 }
 
 add_hydra_pillars() {
