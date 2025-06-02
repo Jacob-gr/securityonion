@@ -74,7 +74,7 @@ for index in $indexes; do
   size_24h_ago=${size_24h_ago:-$current_size}
 
   size_7d_query="from(bucket: \"telegraf/so_long_term\")
-    |> range(start: -8d, stop: -6d)
+    |> range(start: -7d8h, stop: -7d)
     |> filter(fn: (r) => r._measurement == \"elasticsearch_index_size\" and r._field == \"$index\")
     |> last()
     |> keep(columns: [\"_value\"])"
@@ -83,7 +83,7 @@ for index in $indexes; do
   size_7d_ago=${size_7d_ago:-$current_size}
 
   size_30d_query="from(bucket: \"telegraf/so_long_term\")
-    |> range(start: -31d, stop: -29d)
+    |> range(start: -30d8h, stop: -30d)
     |> filter(fn: (r) => r._measurement == \"elasticsearch_index_size\" and r._field == \"$index\")
     |> last()
     |> keep(columns: [\"_value\"])"
