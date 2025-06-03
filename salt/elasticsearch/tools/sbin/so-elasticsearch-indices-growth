@@ -51,8 +51,6 @@ indexes=$(echo "$indexes_result" | tail -n +2 | cut -d',' -f4 | grep -v '^$' | g
 printf "%-50s %15s %15s %15s\n" "Index Name" "Last 24hr (GB)" "Last 7d (GB)" "Last 30d (GB)"
 printf "%-50s %15s %15s %15s\n" "$(printf '%.0s-' {1..50})" "$(printf '%.0s-' {1..15})" "$(printf '%.0s-' {1..15})" "$(printf '%.0s-' {1..15})"
 
-temp_results=$(mktemp)
-
 for index in $indexes; do
   [[ -z "$index" ]] && continue
   current_query="from(bucket: \"telegraf/so_long_term\")
@@ -109,10 +107,7 @@ for index in $indexes; do
       "$index" \
       "$growth_24h_gb" \
       "$growth_7d_gb" \
-      "$growth_30d_gb" >> "$temp_results"
+      "$growth_30d_gb"
   fi
-done
-
-sort -t'|' -k1,1nr "$temp_results" | cut -d'|' -f2-
-rm -f "$temp_results"
+done | sort -t'|' -k1,1nr | cut -d'|' -f2-
 
