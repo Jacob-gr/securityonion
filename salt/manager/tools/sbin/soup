@@ -1071,7 +1071,7 @@ update_airgap_rules() {
 
 update_airgap_playbooks() {
   # Copy the playbooks over to update them for airgap.
-  rsync -a --delete --chown=socore:socore $UPDATE_DIR/airgap-resources/playbooks/* /nsm/airgap-resources/playbooks/
+  rsync -a --delete --chown=socore:socore $UPDATE_DIR/airgap-resources/playbooks/ /nsm/airgap-resources/playbooks/
 }
 
 update_airgap_repo() {
@@ -1258,7 +1258,6 @@ apply_hotfix() {
   elif [[ "$INSTALLEDVERSION" == "2.4.30" ]] ; then
     if [[ $is_airgap -eq 0 ]]; then
       update_airgap_rules
-      update_airgap_playbooks
     fi
     if [[ -f /etc/pki/managerssl.key.old ]]; then
       echo "Skipping Certificate Generation"
