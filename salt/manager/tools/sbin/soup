@@ -1071,6 +1071,8 @@ update_airgap_rules() {
 
 update_airgap_playbooks() {
   # Copy the playbooks over to update them for airgap.
+  mkdir -p /nsm/airgap-resources/playbooks
+  chown -R socore:socore /nsm/airgap-resources/playbooks
   rsync -a --delete --chown=socore:socore $UPDATE_DIR/airgap-resources/playbooks/ /nsm/airgap-resources/playbooks/
 }
 
