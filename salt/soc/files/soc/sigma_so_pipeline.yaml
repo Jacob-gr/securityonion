@@ -12,12 +12,30 @@ transformations:
         sid: rule.uuid
         answer: answers
         query: dns.query.name
-        src_ip: source.ip.keyword
+        src_ip: source.ip
         src_port: source.port
-        dst_ip: destination.ip.keyword
+        dst_ip: destination.ip
         dst_port: destination.port
         winlog.event_data.User: user.name
         logtype: event.code # OpenCanary
+      ## Start Temp Linux Mappings ##
+        ProcessGuid: process.entity_id
+        ProcessId: process.pid
+        Image: process.executable
+        CommandLine: process.command_line
+        CurrentDirectory: process.working_directory
+        ParentProcessGuid: process.parent.entity_id
+        ParentProcessId: process.parent.pid
+        ParentImage: process.parent.executable
+        ParentCommandLine: process.parent.command_line
+        User: user.name
+     ## End Temp Linux Mappings ##
+        document_id: _id
+        rule.type: event.module
+        related_ip: related.ip
+        community_id: network.community_id
+        event_dataset: event.dataset
+        hostname: host.name
     # Maps "opencanary" product to SO IDH logs
     - id: opencanary_idh_add-fields
       type: add_condition
@@ -127,3 +145,95 @@ transformations:
       rule_conditions:
       - type: logsource
         category: file_event
+    # Maps network rules to all network logs
+    # This targets all network logs, all services, generated from endpoints and network
+    - id: network_add-fields
+      type: add_condition
+      conditions:
+        event.category: 'network'
+      rule_conditions:
+      - type: logsource
+        category: network
+    # Maps network_connection rules to endpoint network creation logs
+    # This is an OS-agnostic mapping, to account for logs that don't specify source OS
+    - id: endpoint_network_connection_add-fields
+      type: add_condition
+      conditions:
+        event.category: 'network'
+        event.type: 'start'
+      rule_conditions:
+      - type: logsource
+        category: network_connection
+    # Maps "alert" category to SO Alert events
+    - id: alert_so_add-fields
+      type: add_condition
+      conditions:
+        tags: 'alert'
+      rule_conditions:
+      - type: logsource
+        category: alert
+    # Maps "network + connection" to SO connection logs
+    - id: network_connection_so_add-fields
+      type: add_condition
+      conditions:
+        tags: 'conn'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: connection
+    # Maps "network + dns" to SO DNS logs
+    - id: network_dns_so_add-fields
+      type: add_condition
+      conditions:
+        tags: 'dns'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: dns
+    # Maps "network + http" to SO HTTP logs
+    - id: network_http_so_add-fields
+      type: add_condition
+      conditions:
+        tags: 'http'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: http
+    # Maps "network + file" to SO file logs
+    - id: network_file_so_add-fields
+      type: add_condition
+      conditions:
+        event.category: 'network'
+        tags: 'file'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: file
+    # Maps "network + x509" to SO x509 logs
+    - id: network_x509_so_add-fields
+      type: add_condition
+      conditions:
+        event.category: 'network'
+        tags: 'x509'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: x509
+    # Maps "network + ssl" to SO ssl logs
+    - id: network_ssl_so_add-fields
+      type: add_condition
+      conditions:
+        event.category: 'network'
+        tags: 'ssl'
+      rule_conditions:
+      - type: logsource
+        category: network
+        service: ssl
+    # Maps file to host or network file events
+    - id: file_so_add-fields
+      type: add_condition
+      conditions:
+        tags: '*file'
+      rule_conditions:
+      - type: logsource
+        category: file

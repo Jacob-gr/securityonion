@@ -31,10 +31,12 @@ so-soc:
       - /opt/so/conf/soc/fingerprints:/opt/sensoroni/fingerprints:rw
       - /nsm/soc/jobs:/opt/sensoroni/jobs:rw
       - /nsm/soc/uploads:/nsm/soc/uploads:rw
+      - /nsm/airgap-resources:/nsm/airgap-resources:rw
       - /opt/so/log/soc/:/opt/sensoroni/logs/:rw
       - /opt/so/conf/soc/soc.json:/opt/sensoroni/sensoroni.json:ro
       - /opt/so/conf/soc/ai_summary_repos:/opt/sensoroni/ai_summary_repos:rw
       - /opt/so/conf/navigator/layers/:/opt/sensoroni/navigator/:rw
+      - /opt/so/conf/soc/playbooks/:/opt/sensoroni/playbooks/:rw
 {% if SOCMERGED.telemetryEnabled and not GLOBALS.airgap %}
       - /opt/so/conf/soc/analytics.js:/opt/sensoroni/html/js/analytics.js:ro
 {% endif %}

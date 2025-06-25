@@ -769,6 +769,10 @@ if ! [[ -f $install_opt_file ]]; then
 			title "Syncing AI-Generated Detection Summaries"
 			airgap_detection_summaries
 		fi
+		if [[ $is_airgap ]]; then
+			title "Syncing Playbooks"
+			logCmd "airgap_playbooks /root/SecurityOnion"
+		fi
 		title "Setting up Kibana Default Space"
 		logCmd "so-kibana-space-defaults"
 		add_web_user
